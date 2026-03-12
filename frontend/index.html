@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BVote — Blockchain Voting</title>
+  <link rel="icon" href="images/favicon.png" type="image/png" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="index.css" />
+</head>
+<body>
+
+<header>
+  <div class="logo-wrap">
+    <div class="logo-icon">⛓</div>
+    <div>
+      <span class="logo-text">BVote</span>
+      <span class="logo-sub">Blockchain Voting System</span>
+    </div>
+  </div>
+  <nav>
+    <button class="nav-btn active" onclick="showPage('home', this)">Home</button>
+    <button class="nav-btn" onclick="showPage('elections', this)">Elections</button>
+    <button class="nav-btn" onclick="showPage('register', this)">Register</button>
+    <button class="nav-btn" id="voteNavBtn" onclick="showPage('vote', this)" style="display:none">Vote</button>
+    <button class="nav-btn" id="adminNavBtn" onclick="showPage('admin', this)" style="display:none">Admin</button>
+    <button class="nav-btn" onclick="showPage('results', this)">Results</button>
+  </nav>
+  <div class="header-right">
+    <span class="role-tag" id="roleTag"></span>
+    <div class="wallet-chip" id="walletChip">
+      <span class="wallet-dot"></span>
+      <span id="walletText"></span>
+    </div>
+    <button class="connect-btn" id="connectBtn" onclick="connectWallet()">Connect Wallet</button>
+  </div>
+</header>
+
+<main>
+
+  <!-- HOME -->
+  <div id="page-home" class="page active">
+    <div class="hero">
+      <div class="hero-left">
+        <h1>Your vote,<br><em>on-chain.</em><br>Forever.</h1>
+        <p>Tamper-proof elections powered by Solidity smart contracts on Polygon Amoy. Every ballot is cryptographically secured and publicly auditable.</p>
+        <button class="btn btn-gold" id="heroBtn" onclick="connectWallet()">Connect Wallet to Begin</button>
+      </div>
+      <div class="hero-right">
+        <h3>⬡ Live Contract Stats</h3>
+        <div class="stat-row">
+          <span class="stat-label-dark">Registered Voters</span>
+          <span class="stat-value-dark" id="statVoters">—</span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-label-dark">Elections</span>
+          <span class="stat-value-dark" id="statElections">—</span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-label-dark">Candidates</span>
+          <span class="stat-value-dark" id="statCandidates">—</span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-label-dark">Network</span>
+          <span class="network-label">Polygon Amoy</span>
+        </div>
+        <div class="contract-badge" id="contractBadge">Loading contract...</div>
+      </div>
+    </div>
+
+    <div class="section-head">
+      <h2>How It Works</h2>
+      <span>three steps</span>
+    </div>
+    <div class="steps-grid">
+      <div class="card" style="border-top:3px solid var(--gold)">
+        <div class="step-num">01</div>
+        <div class="step-title">Register</div>
+        <p class="step-desc">Connect your MetaMask wallet and submit your voter registration. Your national ID is hashed — never stored in plain text.</p>
+      </div>
+      <div class="card" style="border-top:3px solid var(--ink)">
+        <div class="step-num">02</div>
+        <div class="step-title">Get Approved</div>
+        <p class="step-desc">An election administrator verifies and approves your registration on-chain before the election opens.</p>
+      </div>
+      <div class="card" style="border-top:3px solid var(--green)">
+        <div class="step-num">03</div>
+        <div class="step-title">Vote</div>
+        <p class="step-desc">Cast your anonymous, cryptographically-secured vote. Receive a blockchain receipt you can verify anytime.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ELECTIONS -->
+  <div id="page-elections" class="page">
+    <div class="section-head"><h2>Elections</h2><span>all elections</span></div>
+    <div id="electionsLoading" class="loading"><div class="spinner"></div>Loading elections...</div>
+    <div class="elections-grid" id="electionsList"></div>
+  </div>
+
+  <!-- REGISTER -->
+  <div id="page-register" class="page">
+    <div class="section-head"><h2>Voter Registration</h2><span>submit your details</span></div>
+    <div class="two-col">
+      <div>
+        <div class="card">
+          <div class="card-title"><div class="card-icon">✍</div>Register to Vote</div>
+          <div id="registerAlert"></div>
+          <div class="form-group">
+            <label>Full Legal Name</label>
+            <input type="text" id="regName" placeholder="As it appears on your ID" />
+          </div>
+          <div class="form-group">
+            <label>National ID Number</label>
+            <input type="text" id="regId" placeholder="Hashed before storage" />
+          </div>
+          <div class="form-group">
+            <label>District / Constituency</label>
+            <input type="text" id="regDistrict" placeholder="Your voting district" />
+          </div>
+          <button class="btn btn-primary" id="regBtn" onclick="registerVoter()">Submit Registration</button>
+          <p class="form-note">⚠ Requires admin approval before you can vote. Connect your wallet first.</p>
+        </div>
+      </div>
+      <div>
+        <div class="card">
+          <div class="card-title"><div class="card-icon">🔍</div>Check Your Status</div>
+          <div id="statusResult" style="margin-bottom:1rem"></div>
+          <button class="btn btn-ghost" onclick="checkStatus()">Check My Status</button>
+        </div>
+        <div class="card card-dark">
+          <div class="privacy-label">PRIVACY NOTICE</div>
+          <p class="privacy-text">Your national ID is SHA-256 hashed in your browser before being sent to the blockchain. The raw ID number is never stored anywhere in our system.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- VOTE -->
+  <div id="page-vote" class="page">
+    <div class="section-head"><h2>Cast Your Vote</h2><span>open elections</span></div>
+    <div id="voteAlert"></div>
+    <div class="elections-grid" id="openElectionsList"></div>
+  </div>
+
+  <!-- ADMIN -->
+  <div id="page-admin" class="page">
+    <div class="section-head"><h2>Admin Panel</h2><span>election management</span></div>
+    <div class="card">
+      <div class="card-title"><div class="card-icon">👥</div>Voter Registrations</div>
+      <div id="adminVotersLoading" class="loading"><div class="spinner"></div></div>
+      <div class="table-wrap" id="votersTableWrap" style="display:none">
+        <table>
+          <thead><tr><th>Name</th><th>Wallet</th><th>District</th><th>Status</th><th>Actions</th></tr></thead>
+          <tbody id="votersBody"></tbody>
+        </table>
+      </div>
+    </div>
+    <div class="two-col">
+      <div class="card">
+        <div class="card-title"><div class="card-icon">➕</div>Add Candidate</div>
+        <div id="candAlert"></div>
+        <div class="form-group"><label>Full Name</label><input type="text" id="candName" placeholder="Candidate full name" /></div>
+        <div class="form-group"><label>Party</label><input type="text" id="candParty" placeholder="Political party" /></div>
+        <div class="form-group"><label>Position</label><input type="text" id="candPosition" placeholder="e.g. President, Governor" /></div>
+        <button class="btn btn-primary" onclick="addCandidate()">Add Candidate</button>
+      </div>
+      <div class="card">
+        <div class="card-title"><div class="card-icon">🗳</div>Create Election</div>
+        <div id="elecAlert"></div>
+        <div class="form-group"><label>Election Name</label><input type="text" id="elecName" placeholder="e.g. 2026 General Election" /></div>
+        <div class="form-group"><label>Description</label><input type="text" id="elecDesc" placeholder="Brief description" /></div>
+        <div class="form-row">
+          <div class="form-group"><label>Start Time</label><input type="datetime-local" id="elecStart" /></div>
+          <div class="form-group"><label>End Time</label><input type="datetime-local" id="elecEnd" /></div>
+        </div>
+        <div class="form-group"><label>Candidate IDs (comma separated)</label><input type="text" id="elecCandIds" placeholder="e.g. 1,2,3" /></div>
+        <button class="btn btn-primary" onclick="createElection()">Create Election</button>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title"><div class="card-icon">⚙</div>Manage Elections</div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>ID</th><th>Name</th><th>Status</th><th>Votes</th><th>Actions</th></tr></thead>
+          <tbody id="adminElectionsBody"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- RESULTS -->
+  <div id="page-results" class="page">
+    <div class="section-head"><h2>Election Results</h2><span>published results</span></div>
+    <div class="card" style="max-width:420px;margin-bottom:1.5rem">
+      <div class="form-group" style="margin-bottom:0">
+        <label>Select Election</label>
+        <select id="resultsSelect" onchange="loadResults()">
+          <option value="">— Choose an election —</option>
+        </select>
+      </div>
+    </div>
+    <div id="resultsContent"></div>
+  </div>
+
+</main>
+
+<!-- VOTE MODAL -->
+<div class="overlay" id="voteModal">
+  <div class="modal">
+    <div class="modal-title" id="modalTitle">Select a Candidate</div>
+    <div class="modal-sub">Your vote is anonymous and cannot be changed once submitted.</div>
+    <div id="modalCandidates"></div>
+    <div id="modalAlert"></div>
+    <div class="modal-actions">
+      <button class="btn btn-gold" id="submitVoteBtn" onclick="submitVote()" disabled>Cast Vote</button>
+      <button class="btn btn-ghost" onclick="closeModal()">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<script src="index.js"></script>
+</body>
+</html>
