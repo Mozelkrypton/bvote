@@ -98,7 +98,7 @@ contract ChainVote {
         _;
     }
 
-    // ── No arguments needed ──
+    //  No arguments needed
     constructor() {
         superAdmin = msg.sender;
         deployedAt = block.timestamp;
@@ -115,7 +115,7 @@ contract ChainVote {
         voterAddresses.push(msg.sender);
     }
 
-    // ── SUPERADMIN ──
+    // SUPERADMIN 
 
     function grantAdmin(address account) external onlySuperAdmin {
         require(account != address(0), "Invalid address");
@@ -131,7 +131,7 @@ contract ChainVote {
         emit AdminRevoked(account, msg.sender);
     }
 
-    // ── VOTER REGISTRATION ──
+    // VOTER REGISTRATION 
 
     function registerVoter(
         string calldata _fullName,
@@ -185,7 +185,7 @@ contract ChainVote {
         emit VoterStatusUpdated(_wallet, _status, msg.sender);
     }
 
-    // ── CANDIDATES ──
+    //  CANDIDATES 
 
     function addCandidate(
         string calldata _fullName,
@@ -218,7 +218,7 @@ contract ChainVote {
         emit CandidateUpdated(_id, _status, msg.sender);
     }
 
-    // ── ELECTIONS ──
+    //  ELECTIONS 
 
     function createElection(
         string    calldata _name,
@@ -271,7 +271,7 @@ contract ChainVote {
         emit ResultsPublished(_id, elections[_id].totalVotes);
     }
 
-    // ── VOTING ──
+    //  VOTING 
 
     function castVote(
         uint256 _electionId,
@@ -304,7 +304,7 @@ contract ChainVote {
         emit VoteCast(_electionId, receipt, block.timestamp);
     }
 
-    // ── VIEW FUNCTIONS ──
+    //  VIEW FUNCTIONS 
 
     function getElectionCandidates(uint256 _id)
         external view electionExists(_id) returns (uint256[] memory)
