@@ -1,3 +1,4 @@
+//hardhat.config.ts
 import { HardhatUserConfig } from "hardhat/config";
 import dotenv from "dotenv";
 dotenv.config();
