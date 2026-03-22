@@ -3,7 +3,7 @@
    All JavaScript for the BVote frontend
 ══════════════════════════════════════ */
 
-const API = 'http://localhost:4000';
+const API = 'https://bvote-production.up.railway.app';
 
 // ── STATE ──
 let token      = localStorage.getItem('bvote_token');
