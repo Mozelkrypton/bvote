@@ -5,7 +5,7 @@ dotenv.config();
 
 // Load compiled contract ABI
 const artifact = JSON.parse(
-  readFileSync("./artifacts/contracts/ChainVote.sol/ChainVote.json", "utf8")
+  readFileSync("./ChainVote.json", "utf8")
 );
 
 // Connect to Polygon Amoy
