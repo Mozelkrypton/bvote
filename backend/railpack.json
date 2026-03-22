@@ -1,0 +1,5 @@
+{
+  "deploy": {
+    "cmd": "node server.js"
+  }
+}
