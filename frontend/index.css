@@ -843,7 +843,6 @@ tbody tr:hover td { background: var(--cream); }
 }
 /* ══════════════════════════════════════
    MOBILE RESPONSIVE
-   Paste this at the bottom of index.css
 ══════════════════════════════════════ */
 
 @media (max-width: 768px) {
