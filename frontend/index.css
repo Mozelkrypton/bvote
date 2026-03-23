@@ -841,3 +841,145 @@ tbody tr:hover td { background: var(--cream); }
   .form-row { grid-template-columns: 1fr; }
   nav { display: none; }
 }
+/* ══════════════════════════════════════
+   MOBILE RESPONSIVE
+   Paste this at the bottom of index.css
+══════════════════════════════════════ */
+
+@media (max-width: 768px) {
+
+  /* ── HEADER ── */
+  header {
+    height: auto;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    padding: 0.75rem 1rem;
+  }
+
+  .logo-text { font-size: 1.3rem; }
+  .logo-sub  { font-size: 0.55rem; }
+
+  nav {
+    order: 3;
+    width: 100%;
+    overflow-x: auto;
+    display: flex;
+    gap: 0.1rem;
+    padding-bottom: 0.5rem;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .nav-btn {
+    font-size: 0.75rem;
+    padding: 0.4rem 0.6rem;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .header-right { gap: 0.5rem; }
+
+  .connect-btn {
+    font-size: 0.75rem;
+    padding: 0.4rem 0.75rem;
+  }
+
+  .wallet-chip {
+    font-size: 0.7rem;
+    padding: 0.3rem 0.6rem;
+  }
+
+  .role-tag {
+    font-size: 0.6rem;
+    padding: 0.15rem 0.4rem;
+  }
+
+  /* ── MAIN ── */
+  main { padding: 1.25rem 1rem; }
+
+  /* ── HERO ── */
+  .hero {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    min-height: auto;
+    margin-bottom: 2rem;
+  }
+
+  .hero-left h1 {
+    font-size: 2.2rem;
+    margin-bottom: 1rem;
+  }
+
+  .hero-left p {
+    font-size: 0.95rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .hero-right { padding: 1.5rem; }
+  .stat-value-dark { font-size: 1.4rem; }
+
+  /* ── STEPS ── */
+  .steps-grid { grid-template-columns: 1fr; gap: 1rem; }
+
+  /* ── SECTION HEAD ── */
+  .section-head h2 { font-size: 1.5rem; }
+
+  /* ── ELECTIONS ── */
+  .elections-grid { grid-template-columns: 1fr; }
+
+  /* ── LAYOUTS ── */
+  .two-col  { grid-template-columns: 1fr; gap: 1rem; }
+  .form-row { grid-template-columns: 1fr; }
+
+  /* ── CARDS ── */
+  .card { padding: 1.25rem; }
+
+  /* ── TABLES ── */
+  .table-wrap { font-size: 0.8rem; }
+  th, td { padding: 0.6rem 0.75rem; }
+
+  /* ── BUTTONS ── */
+  .btn {
+    font-size: 0.85rem;
+    padding: 0.65rem 1.1rem;
+  }
+
+  .td-actions {
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+
+  /* ── MODAL ── */
+  .modal {
+    padding: 1.5rem;
+    width: 95%;
+  }
+
+  .modal-title { font-size: 1.2rem; }
+
+  .modal-actions {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .modal-actions .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  /* ── CANDIDATES ── */
+  .candidate-option { padding: 0.85rem 1rem; }
+
+  /* ── RESULTS ── */
+  .result-top {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.25rem;
+  }
+}
+
+/* ── EXTRA SMALL PHONES ── */
+@media (max-width: 380px) {
+  .hero-left h1 { font-size: 1.8rem; }
+  .logo-text    { font-size: 1.1rem; }
+  .nav-btn      { font-size: 0.7rem; padding: 0.3rem 0.5rem; }
+}
