@@ -140,7 +140,7 @@ async function loadHomeStats() {
 }
 
 /* ══════════════════════════════════════
-   ELECTIONS PAGE
+   ELECTIONS PAGE view and load
 ══════════════════════════════════════ */
 async function loadElections() {
   document.getElementById('electionsLoading').style.display = 'block';
