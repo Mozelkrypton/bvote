@@ -216,7 +216,3 @@ curl https://bvote-production.up.railway.app/api/public/info
 Copyright (c) 2025
 
 ## 🙏 Acknowledgements
-
-- Zetech University Department of ICT Engineering
-- Polygon Network for free testnet infrastructure
-- Hardhat, ethers.js, and the Ethereum developer community
