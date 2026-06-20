@@ -23,7 +23,7 @@
 
 ## 📖 About
 
-BVote is a final year research project developed at **Zetech University** (School of ICT, Media and Engineering) for the **Bachelor of Science in Computer Science** degree.
+BVote is a final year project developed at **Zetech University** (School of ICT, Media and Engineering) for the **Bachelor of Science in Computer Science** degree.
 
 The system addresses the transparency and integrity challenges of conventional voting systems by leveraging blockchain technology. It is designed for institutional elections (universities, colleges) as a proof of concept for eventual government-scale deployment in Kenya.
 
@@ -213,20 +213,7 @@ curl https://bvote-production.up.railway.app/api/public/info
 
 ## 📄 License
 
-Copyright (c) 2025 Levian Amos
-Zetech University — School of ICT, Media and Engineering
-Licensed under the MIT License.
-
----
-
-## 👨‍💻 Author
-
-**Levian Amos**
-Registration No: BCS-05-0164/2022
-Zetech University — School of ICT, Media and Engineering
-Bachelor of Science in Computer Science
-
----
+Copyright (c) 2025
 
 ## 🙏 Acknowledgements
 
